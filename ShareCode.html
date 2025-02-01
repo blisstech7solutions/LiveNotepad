@@ -15,7 +15,11 @@
 <body>
     
   <div class="Editor-container">
-    <img src="text.gif" width="50%" height="50%" alt="Text Editor">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <img src="text.gif" width="50%" height="50%" alt="Text Editor">
+      <img src="logoB.png" style="width: 30%; height: 30%;">
+  </div>
+  
     <div class="toolbar">
         <button onclick="saveContentToFirestore()">Save Content</button>
         <button class="btn" onclick="formatText('bold')" title="Bold(Cntrl + B)"><i class="fas fa-bold"></i></button>
