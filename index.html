@@ -4,64 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Share Code</title>
- 
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- <link rel="stylesheet" href="/style.css"> -->
+    <!-- <link rel="stylesheet" href="/"> -->
   <!-- Add Firebase SDK -->
 
 </head>
-<link rel="stylesheet" href="style.css">
+<style>
+  .main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ensures full viewport height */
+    background-color: #f0f0f0; /* Optional: adds background color */
+}
+
+#Share-Code {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#Share-Code:hover {
+    background-color: #45a049; /* Darker green when hovered */
+}
+
+</style>
 <body>
-    
-  <div class="Editor-container">
-    <img src="text.gif" width="50%" height="50%" alt="Text Editor">
-    <div class="toolbar">
-        <button onclick="saveContentToFirestore()">Save Content</button>
-        <button class="btn" onclick="formatText('bold')" title="Bold(Cntrl + B)"><i class="fas fa-bold"></i></button>
+<div class="main-container">
+    <button id="Share-Code"><i class="fa fa-hand-pointer-o"></i> Live Notepad</button>
 
-        <button class="btn" onclick="formatText('italic')" title="Italic(Cntrl + I)"><i class="fas fa-italic"></i></button>
-        <button class="btn" onclick="formatText('underline')" title="Underline(Cntrl + U)"><i class="fas fa-underline"></i></button>
-        <button class="btn" onclick="addBullet()" title="Unordered List(Cntrl + Shift + U)"><i class="fas fa-list-ul"></i></button>
-        <button class="btn" onclick="addNumberedList()" title="Ordered List(Cntrl + Shift + O)"><i class="fas fa-list-ol"></i></button>
-        
-        <!-- <button class="btn" style="background-color: blue; color: white;" onclick="changeColor('blue')" title="Blue(Cntrl + Shift + B)">B</button>
-        <button class="btn" style="background-color: red; color: white;" onclick="changeColor('red')" title="Red(Cntrl + Shift + R)">R</button>
-        <button class="btn" style="background-color: black; color: white;" onclick="changeColor('black')" title="Black(Cntrl + Shift + K)">BL</button>
-        <button class="btn" style="background-color: green; color: white;" onclick="changeColor('green')" title="Green(Cntrl + Shift + G)">G</button> -->
-        <!-- <button class="btn" onclick="formatText('justifyLeft')" title="Align Left"><i class="fas fa-align-left"></i></button>
-        <button class="btn" onclick="formatText('justifyCenter')" title="Align Center"><i class="fas fa-align-center"></i></button>
-        <button class="btn" onclick="formatText('justifyRight')" title="Align Right"><i class="fas fa-align-right"></i></button>
-        <button class="btn" onclick="formatText('justifyRight')" title="Align Right"><i class="fas fa-align-right"></i></button> -->
-        <button class="btn"  title="Download TXT" id="download-btn"><i class="fas fa-download"></i></button>
-
-        <button class="btn" onclick="copyText()" title="Copy Text (Ctrl + C)"><i class="fas fa-copy"></i> Copy Text</button>
-        <button class="btn" id="copy-url">Copy URL</button>
-      
-     
-       
-
-        <!-- <button class="btn" onclick="copyHTML()" title="Copy HTML (Ctrl + Shift + C)"><i class="fas fa-code"></i> Copy HTML</button> -->
-    </div>
-    <div class="input-container">
-        <b>Text Editor</b>
-        <div contenteditable="true" class="input-field"></div>
-    </div>
-    
 </div>
-<div id="share-modal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn" id="close-modal">&times;</span>
-    <p>URL copied Share it via</p>
-    <button id="share-email" class="share-button" disabled>
-      <i class="fas fa-envelope"></i> Share via Email
-    </button>
-    <button id="share-whatsapp" class="share-button" style="background-color: #25D366; color: white;" disabled>
-      <i class="fab fa-whatsapp"></i> Share via WhatsApp
-    </button>
-  </div>
-</div>
-
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="/script.js"></script>

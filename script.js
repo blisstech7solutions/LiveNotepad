@@ -63,7 +63,7 @@ $("#Share-Code").click(function(){
   const timestamp = getFormattedDate();
   $("#Share-Code").hide()
     $(".Editor-container").show()
-    window.location.href = `/index.html?id=${timestamp}`;
+    window.location.href = `/ShareCode.html?id=${timestamp}`;
     db.collection("IKSDEV_NotePad_Share").doc(timestamp).set({
       content: "",
       timestamp: timestamp
