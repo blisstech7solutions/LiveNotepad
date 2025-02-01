@@ -1,0 +1,214 @@
+  /* Body styling */
+  .modal {
+    display: none; /* Initially hidden */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  .close-btn {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .close-btn:hover,
+  .close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .share-button {
+    margin: 10px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .share-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+  }
+  
+  /* Main container for the editor */
+  .Editor-container {
+      width: 100%;
+      max-width: 100%;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+  }
+  
+  /* Toolbar container */
+  .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+  }
+  
+  /* Button styling */
+  .btn {
+      background-color: #f0f0f0;
+      border: none;
+      border-radius: 4px;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+  
+  .btn:hover {
+      background-color: #e0e0e0;
+      transform: scale(1.1);
+  }
+  
+  .btn:focus {
+      outline: none;
+  }
+  
+  /* Active button styling for color change */
+  .btn:active {
+      transform: scale(0.9);
+  }
+  
+  /* Specific button colors for text formatting */
+  .btn i {
+      font-size: 16px;
+  }
+  
+  /* Styling for color buttons */
+  .btn[style*="background-color"] {
+      font-weight: bold;
+      color: white;
+  }
+  
+  /* Button tooltip titles */
+  .btn[title] {
+      position: relative;
+  }
+  
+  .btn[title]:hover::after {
+      content: attr(title);
+      position: absolute;
+      top: -30px;
+      background-color: #333;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      white-space: nowrap;
+  }
+  
+  /* Input container */
+  .input-container {
+      margin-top: 20px;
+  }
+  
+  /* Text label for the editor */
+  .input-container b {
+      font-size: 18px;
+      color: #333;
+      display: block;
+      margin-bottom: 8px;
+  }
+  
+  /* Contenteditable input field */
+  .input-field {
+      min-height: 300px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 15px;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fafafa;
+      word-wrap: break-word;
+      outline: none;
+  }
+  
+  /* Focus styling for contenteditable */
+  .input-field:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  }
+  
+  /* Save button styling */
+  button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 12px 20px;
+      font-size: 16px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+  }
+  
+  button:hover {
+      background-color: #0056b3;
+  }
+  
+  button:focus {
+      outline: none;
+  }
+  
+  button:active {
+      transform: scale(0.98);
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+      .Editor-container {
+          width: 95%;
+          padding: 15px;
+      }
+  
+      .toolbar {
+          flex-direction: column;
+          align-items: flex-start;
+      }
+  
+      .btn {
+          width: 100%;
+          margin-bottom: 8px;
+      }
+  
+      .input-field {
+          min-height: 150px;
+      }
+  }
