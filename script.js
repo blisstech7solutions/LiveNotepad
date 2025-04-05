@@ -225,3 +225,18 @@ document.getElementById("download-btn").addEventListener("click", function() {
   // Programmatically click the link to start the download
   link.click();
 });
+
+  // Disable right-click
+  document.addEventListener('contextmenu', event => event.preventDefault());
+
+  // Disable F12, Ctrl+Shift+I, Ctrl+U etc.
+  document.onkeydown = function (e) {
+    if (
+      e.key === "F12" ||
+      (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J" || e.key === "C")) ||
+      (e.ctrlKey && e.key === "U")
+    ) {
+      return false;
+    }
+  };
+
