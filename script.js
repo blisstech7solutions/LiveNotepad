@@ -91,17 +91,20 @@ function saveContentToFirestore() {
     timestamp: new Date() 
   })
   .then(() => {
-  Swal.fire({
-  title: "Success!",
-  text: "Content saved successfully!",
-  icon: "success",
-  confirmButtonText: "OK",
-  timer: 3000, // Duration in milliseconds
+Swal.fire({
+  toast: true,
+  position: 'top-end', // top-right corner
+  icon: 'success',
+  title: 'Content saved successfully!',
+  showConfirmButton: false,
+  timer: 3000,
   timerProgressBar: true,
-  didOpen: () => {
-    Swal.showLoading(); // optional, shows a spinner while counting down
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
   }
 });
+
 
   })
   .catch((error) => {
