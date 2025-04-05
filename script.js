@@ -91,7 +91,17 @@ function saveContentToFirestore() {
     timestamp: new Date() 
   })
   .then(() => {
-   swal("Success!", "Content saved successfully!", "success");
+  Swal.fire({
+  title: "Success!",
+  text: "Content saved successfully!",
+  icon: "success",
+  confirmButtonText: "OK",
+  timer: 3000, // Duration in milliseconds
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading(); // optional, shows a spinner while counting down
+  }
+});
 
   })
   .catch((error) => {
@@ -99,12 +109,8 @@ function saveContentToFirestore() {
   });
 }
 // Function to get the content from Firestore
-Swal.fire({
-  title: "Success!",
-  text: "Content saved successfully!",
-  icon: "success",
-  confirmButtonText: "OK"
-});
+
+
 async function getDataAndSetHTML(fbDocName) {
   const docRef = db.collection("IKSDEV_NotePad_Share").doc(fbDocName);
 
