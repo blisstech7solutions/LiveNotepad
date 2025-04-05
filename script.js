@@ -91,19 +91,32 @@ function saveContentToFirestore() {
     timestamp: new Date() 
   })
   .then(() => {
+let timerInterval;
+
 Swal.fire({
+  title: "Saved Successfully",
+  html: "I will close in <b></b> milliseconds.",
   toast: true,
-  position: 'top-end', // top-right corner
-  icon: 'success',
-  title: 'Content saved successfully!',
-  showConfirmButton: false,
-  timer: 3000,
+  position: 'top-end', // Top-right corner
+  timer: 2000,
   timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer);
-    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  showConfirmButton: false,
+  didOpen: () => {
+    Swal.showLoading();
+    const timer = Swal.getHtmlContainer().querySelector("b");
+    timerInterval = setInterval(() => {
+      timer.textContent = `${Swal.getTimerLeft()}`;
+    }, 100);
+  },
+  willClose: () => {
+    clearInterval(timerInterval);
+  }
+}).then((result) => {
+  if (result.dismiss === Swal.DismissReason.timer) {
+    console.log("I was closed by the timer");
   }
 });
+
 
 
   })
