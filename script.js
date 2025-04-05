@@ -54,7 +54,7 @@ $(document).ready(async function () {
   //       alert("Authentication failed. Please try again later.");
   //     }
   //   });
-    setTimeout(function() {  getDataAndSetHTML(fbDocName) }, 5000);
+    setTimeout(function() {  getDataAndSetHTML(fbDocName) }, 1000);
     
   });
 const shareButton = document.getElementById('Share-Code');
