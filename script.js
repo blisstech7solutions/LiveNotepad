@@ -91,14 +91,20 @@ function saveContentToFirestore() {
     timestamp: new Date() 
   })
   .then(() => {
-    alert("Content saved successfully!");
+   swal("Success!", "Content saved successfully!", "success");
+
   })
   .catch((error) => {
     console.error("Error saving content: ", error);
   });
 }
 // Function to get the content from Firestore
-
+Swal.fire({
+  title: "Success!",
+  text: "Content saved successfully!",
+  icon: "success",
+  confirmButtonText: "OK"
+});
 async function getDataAndSetHTML(fbDocName) {
   const docRef = db.collection("IKSDEV_NotePad_Share").doc(fbDocName);
 
