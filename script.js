@@ -64,7 +64,7 @@ $("#Share-Code").click(function(){
   $("#Share-Code").hide()
     $(".Editor-container").show()
     window.location.href = `/ShareCode.html?id=${timestamp}`;
-    db.collection("IKSDEV_NotePad_Share").doc(timestamp).set({
+    db.collection("NotePad_Share").doc(timestamp).set({
       content: "",
       timestamp: timestamp
     })
@@ -86,7 +86,7 @@ const fbDocName = urlParams.get('id');
 // Function to save content to Firestore
 function saveContentToFirestore() {
   const content =$('.input-field').html()
-  db.collection("IKSDEV_NotePad_Share").doc(fbDocName).set({
+  db.collection("NotePad_Share").doc(fbDocName).set({
     content: content,
     timestamp: new Date() 
   })
@@ -128,7 +128,7 @@ Swal.fire({
 
 
 async function getDataAndSetHTML(fbDocName) {
-  const docRef = db.collection("IKSDEV_NotePad_Share").doc(fbDocName);
+  const docRef = db.collection("NotePad_Share").doc(fbDocName);
 
   try {
     // Using .onSnapshot to listen for real-time updates
