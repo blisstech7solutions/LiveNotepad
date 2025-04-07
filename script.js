@@ -95,7 +95,7 @@ let timerInterval;
 
 Swal.fire({
   title: "Saved Successfully",
-  html: "I will close in <b></b> milliseconds.",
+  // html: "I will close in <b></b> milliseconds.",
   toast: true,
   position: 'top-end', // Top-right corner
   timer: 2000,
