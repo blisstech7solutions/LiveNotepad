@@ -1,258 +1,192 @@
-/* Body styling */
+/* Body */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(120deg, #e3f2fd, #f8f9fa);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: center; /* Centered Logo */
+  align-items: center;
+  padding: 15px 40px;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.header img.logo {
+  height: 70px; /* Bigger logo */
+}
+.header img.gif {
+  max-height: 60px;
+}
+
+/* Editor Container */
+.Editor-container {
+  width: 90%;
+  max-width: 1400px;
+  margin: 30px auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.Editor-container:hover {
+  transform: translateY(-2px);
+  transition: transform 0.3s ease;
+}
+
+/* Toolbar (Sticky) */
+.toolbar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 12px 15px;
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+.toolbar .btn {
+  background-color: #f4f6f8;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 18px; /* Bigger icons */
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.25s ease;
+}
+.toolbar .btn:hover {
+  background-color: #007bff;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,123,255,0.3);
+}
+
+/* Input Field */
+.input-container {
+  padding: 20px;
+}
+.input-container b {
+  font-size: 22px;
+  margin-bottom: 8px;
+  display: block;
+  color: #444;
+  text-align: center;
+}
+.input-field {
+  min-height: 500px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  font-size: 16px;
+  background-color: #fafafa;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.input-field:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 10px rgba(0,123,255,0.2);
+  background-color: white;
+}
+
+/* Sticky Save Button */
+.save-btn-sticky {
+  position: fixed;
+  right: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #28a745;
+  color: white;
+  border-radius: 30px;
+  padding: 14px 20px;
+  border: none;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  z-index: 999;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.save-btn-sticky:hover {
+  background-color: #218838;
+  transform: translateY(-50%) scale(1.05);
+}
+.save-btn-sticky i {
+  font-size: 18px;
+}
+
+/* Modal */
 .modal {
-    display: none; /* Initially hidden */
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    padding-top: 60px;
-  }
-  
-  .modal-content {
-    background-color: #fff;
-    margin: 5% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 400px;
-    text-align: center;
-  }
-  
-  .close-btn {
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
-  
-  .close-btn:hover,
-  .close-btn:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-  .share-button {
-    margin: 10px;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .share-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
-  
-  /* Main container for the editor */
-  .Editor-container {
-    width: 100%;
-    max-width: 100%;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Toolbar container */
-  .toolbar {
-    display: flex;
-    flex-wrap: nowrap; /* Prevent wrapping, make buttons fit in one row */
-    gap: 10px;
-    margin-bottom: 15px;
-    justify-content: center; /* Center buttons horizontally */
-    overflow-x: auto; /* Allow horizontal scrolling if buttons overflow */
-  }
-  
-  /* Button styling */
-  .btn {
-    background-color: #f0f0f0;
-    border: none;
-    border-radius: 4px;
-    padding: 10px;
-    cursor: pointer;
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  padding-top: 60px;
+}
+.modal-content {
+  background: white;
+  margin: 5% auto;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+}
+.close-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+.share-button {
+  margin: 10px;
+  padding: 10px 15px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+.share-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Footer (Sticky at bottom) */
+footer {
+  background: white;
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+  border-top: 1px solid #ddd;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .save-btn-sticky {
+    right: 15px;
+    padding: 10px 14px;
     font-size: 14px;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    min-width: 50px; /* Ensures buttons don't shrink too small */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
   }
-  
-  .btn:hover {
-    background-color: #e0e0e0;
-    transform: scale(1.1);
-  }
-  
-  .btn:focus {
-    outline: none;
-  }
-  
-  /* Active button styling for color change */
-  .btn:active {
-    transform: scale(0.9);
-  }
-  
-  /* Specific button colors for text formatting */
-  .btn i {
+  .toolbar .btn {
     font-size: 16px;
+    padding: 8px 12px;
   }
-  
-  /* Styling for color buttons */
-  .btn[style*="background-color"] {
-    font-weight: bold;
-    color: white;
-  }
-  
-  /* Button tooltip titles */
-  .btn[title] {
-    position: relative;
-  }
-  
-  .btn[title]:hover::after {
-    content: attr(title);
-    position: absolute;
-    top: -30px;
-    background-color: #333;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    white-space: nowrap;
-  }
-  
-  /* Input container */
-  .input-container {
-    margin-top: 20px;
-  }
-  
-  /* Text label for the editor */
-  .input-container b {
-    font-size: 18px;
-    color: #333;
-    display: block;
-    margin-bottom: 8px;
-  }
-  
-  /* Contenteditable input field */
-  .input-field {
-    min-height: 300px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 15px;
-    font-size: 16px;
-    line-height: 1.6;
-    color: #333;
-    background-color: #fafafa;
-    word-wrap: break-word;
-    outline: none;
-  }
-  
-  /* Focus styling for contenteditable */
-  .input-field:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-  }
-  
-  /* Save button styling */
-  button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 12px 20px;
-    font-size: 16px;
-    margin-top: 20px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  button:focus {
-    outline: none;
-  }
-  
-  button:active {
-    transform: scale(0.98);
-  }
-  
-  /* Mobile responsiveness */
-  @media (max-width: 768px) {
-    .Editor-container {
-      width: 95%;
-      padding: 15px;
-    }
-  
-    .toolbar {
-      flex-wrap: nowrap; /* Prevent wrapping and keep buttons in a single row */
-      justify-content: space-between; /* Ensure space between buttons */
-      overflow-x: auto; /* Allow horizontal scrolling if needed */
-    }
-  
-    .btn {
-      width: auto; /* Allow buttons to be of auto width */
-      font-size: 12px; /* Adjust button font size */
-      padding: 8px 10px; /* Adjust button padding */
-    }
-  
-    .input-field {
-      min-height: 150px; /* Reduce the input area height on mobile */
-      font-size: 14px; /* Adjust font size for contenteditable area */
-    }
-  
-    button {
-      font-size: 14px; /* Reduce button font size */
-      padding: 10px 16px; /* Adjust padding for save button */
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .toolbar {
-      flex-wrap: nowrap; /* Keep buttons in a single row */
-      gap: 8px; /* Reduce the gap between buttons */
-      justify-content: space-between; /* Distribute buttons evenly */
-    }
-  
-    .btn {
-      font-size: 12px; /* Make text smaller on very small screens */
-      padding: 8px;
-      min-width: 40px; /* Further reduce the size of buttons */
-    }
-  
-    .btn i {
-      font-size: 14px; /* Adjust icon size */
-    }
-  
-    .input-field {
-      font-size: 14px; /* Make text inside the editor smaller on small screens */
-    }
-  
-    button {
-      font-size: 14px; /* Reduce button font size */
-      padding: 10px 16px; /* Reduce padding */
-    }
-  }
-  
+}

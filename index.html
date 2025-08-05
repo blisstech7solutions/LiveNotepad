@@ -3,55 +3,172 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Text|Edit|Sync</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- <link rel="stylesheet" href="/"> -->
-  <!-- Add Firebase SDK -->
+  <title>Collab Connect | Real-Time Text Collaboration</title>
 
+  <!-- Bootstrap & Icons -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      padding: 0.8rem 1rem;
+    }
+    .navbar-brand {
+      font-weight: bold;
+      color: white !important;
+      display: flex;
+      align-items: center;
+    }
+    .navbar-brand img {
+      height: 45px;
+      margin-right: 8px;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      color: white;
+      padding: 28px 0;
+      text-align: center;
+    }
+    .logo-container img {
+      width: 90px;
+      margin: 10px;
+      transition: transform 0.3s ease;
+    }
+    .logo-container img:hover {
+      transform: scale(1.2);
+    }
+    .btn-main {
+      background: linear-gradient(90deg, #4CAF50, #45a049);
+      border: none;
+      padding: 14px 28px;
+      font-size: 18px;
+      border-radius: 8px;
+      color: white;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn-main:hover {
+      transform: translateY(-2px);
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+    }
+
+    /* Features */
+    .features {
+      padding: 60px 0;
+      background: #f8f9fa;
+    }
+    .feature-box {
+      padding: 25px;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: white;
+    }
+    .feature-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 8px 20px rgba(0,0,0,0.1);
+    }
+    .feature-icon {
+      font-size: 45px;
+      color: #4facfe;
+      margin-bottom: 15px;
+    }
+
+    /* Footer */
+    footer {
+      background: #222;
+      color: white;
+      padding: 15px 0;
+      text-align: center;
+      margin-top: auto;
+      font-size: 14px;
+    }
+  </style>
 </head>
-<style>
-  .main-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Ensures full viewport height */
-    background-color: #f0f0f0; /* Optional: adds background color */
-}
-
-#Share-Code {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #4CAF50; /* Green background */
-    color: white; /* White text */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#Share-Code:hover {
-    background-color: #45a049; /* Darker green when hovered */
-}
-
-</style>
 <body>
-<div class="main-container">
-<!--   <img src="logoB.png" style="width: 10%; height: 10%;"> -->
-    <button id="Share-Code"><i class="fa fa-hand-pointer-o"></i> Share Text in Sync </button>
 
-</div>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <!-- <div class="container">
+    <a class="navbar-brand" href="#">
+      <img src="/collab connect.png" alt="Logo">
+      Collab Connect
+    </a>
+  </div> -->
+</nav>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<main>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="logo-container">
+        <img src="/collab connect.png" alt="Collab Connect Logo" style="width: 20%;height: 20%;">
+      </div>
+      <h1 class="mt-4">Real-Time Text Collaboration</h1>
+      <p class="lead mb-4">Share, edit, and sync your text seamlessly with anyone, anywhere.</p>
+      <button id="Share-Code" class="btn-main">
+        <i class="fa fa-hand-pointer"></i> Share Text in Sync
+      </button>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-4 mb-4">
+          <div class="feature-box">
+            <div class="feature-icon"><i class="fas fa-sync-alt"></i></div>
+            <h4>Live Sync</h4>
+            <p>Edit and share text instantly with all collaborators in real-time.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="feature-box">
+            <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+            <h4>Secure</h4>
+            <p>End-to-end encryption ensures your data stays safe and private.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="feature-box">
+            <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+            <h4>Cross-Platform</h4>
+            <p>Works on desktop, tablet, and mobile devices seamlessly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2025 Collab Connect. All Rights Reserved.</p>
+</footer>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 <script src="/script.js"></script>
-<!-- <script src="/firebaseconnection.js"></script> -->
 <script src="/MyEditor.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth-compat.js"></script>
-
 
 </body>
 </html>

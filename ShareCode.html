@@ -1,86 +1,305 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Text|Edit|Sync</title>
- 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- <link rel="stylesheet" href="/style.css"> -->
-  <!-- Add Firebase SDK -->
-  <!-- SweetAlert2 CDN -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <!-- SweetAlert CDN -->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <!-- Bootstrap & FontAwesome -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
 
+  <!-- SweetAlert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f7fa;
+      color: #222;
+      overflow: hidden;
+    }
+
+    /* Sticky header with centered logo */
+    header {
+      position: sticky;
+      top: 0;
+      background:white;
+      color: white;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center; /* center logo */
+      padding: 0 20px;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    header img.logo {
+      height: 50px; /* bigger size */
+      user-select: none;
+    }
+
+    header .header-icons {
+      position: absolute;
+      right: 20px;
+      display: flex;
+      gap: 20px;
+    }
+
+    header .header-icons button {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: color 0.25s ease;
+    }
+
+    header .header-icons button:hover {
+      color: #38bdf8;
+    }
+
+    /* Toolbar fixed inside container */
+    .toolbar {
+      position: sticky;
+      top: 0;
+      background: white;
+      padding: 8px 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+
+    /* Toolbar buttons */
+    .toolbar .btn, .toolbar button {
+      background: #0ea5e9;
+      border: none;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+
+    .toolbar .btn:hover, .toolbar button:hover {
+      background: #0284c7;
+      box-shadow: 0 0 8px #0284c7;
+    }
+
+    /* Save Content button special style */
+    .toolbar button:first-child {
+      background: linear-gradient(90deg, #f97316, #facc15);
+      color: #1a1a1a;
+      font-weight: 700;
+      box-shadow: 0 0 8px #f97316;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .toolbar button:first-child:hover {
+      background: linear-gradient(90deg, #ea580c, #eab308);
+      box-shadow: 0 0 15px #ea580c;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 15px #ea580c; }
+      50% { box-shadow: 0 0 30px #f97316; }
+    }
+
+    /* Main container */
+    .Editor-container {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 70px);
+      background: #ffffff;
+      border-radius: 8px;
+      margin: 0 20px 20px 20px;
+      box-shadow: inset 0 0 10px #e0e7ff;
+      overflow: hidden;
+    }
+
+    /* Scrollable editor area with sticky toolbar */
+    .editor-scroll {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .input-container {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .input-container > b {
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+      color: #334155;
+    }
+
+    .input-field {
+      flex: 1;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px;
+      outline: none;
+      overflow-y: auto;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      color: #1e293b;
+      background-color: #f9fafb;
+      box-shadow: inset 0 0 8px #cbd5e1;
+      transition: border-color 0.3s ease;
+      min-height: 0;
+    }
+
+    .input-field:focus {
+      border-color: #0ea5e9;
+      box-shadow: 0 0 10px #0ea5e9;
+    }
+
+    /* Modal */
+    #share-modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0; top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+    }
+
+    #share-modal .modal-content {
+      background: white;
+      padding: 30px 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 360px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      position: relative;
+    }
+
+    #share-modal .close-btn {
+      position: absolute;
+      right: 15px;
+      top: 12px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .share-button {
+      margin: 10px 0;
+      padding: 10px 18px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    .share-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .share-button i {
+      font-size: 1.3rem;
+    }
+
+    @media (max-width: 768px) {
+      .toolbar {
+        justify-content: center;
+      }
+      .toolbar button, .toolbar .btn {
+        flex: 1 1 40px;
+        padding: 8px;
+      }
+      header .header-icons {
+        gap: 12px;
+      }
+    }
+  </style>
 </head>
-<link rel="stylesheet" href="style.css">
 <body>
-    
+
+  <!-- Sticky Header -->
+  <header>
+    <img src="collab connect.png" alt="Logo" class="logo" />
+    <div class="header-icons">
+      <button title="Settings"><i class="fas fa-cog"></i></button>
+      <button title="Help"><i class="fas fa-question-circle"></i></button>
+      <button title="User Account"><i class="fas fa-user-circle"></i></button>
+    </div>
+  </header>
+
+  <!-- Editor Container -->
   <div class="Editor-container">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-      <img src="text.gif" width="50%" height="50%" alt="Text Editor">
-<!--       <img src="logoB.png" style="width: 10%; height: 10%;"> -->
-  </div>
-  
-    <div class="toolbar">
+    <div class="editor-scroll">
+      <!-- Sticky Toolbar inside scroll -->
+      <div class="toolbar">
         <button onclick="saveContentToFirestore()">Save Content</button>
         <button class="btn" onclick="formatText('bold')" title="Bold(Cntrl + B)"><i class="fas fa-bold"></i></button>
-
         <button class="btn" onclick="formatText('italic')" title="Italic(Cntrl + I)"><i class="fas fa-italic"></i></button>
         <button class="btn" onclick="formatText('underline')" title="Underline(Cntrl + U)"><i class="fas fa-underline"></i></button>
         <button class="btn" onclick="addBullet()" title="Unordered List(Cntrl + Shift + U)"><i class="fas fa-list-ul"></i></button>
         <button class="btn" onclick="addNumberedList()" title="Ordered List(Cntrl + Shift + O)"><i class="fas fa-list-ol"></i></button>
-        
-        <!-- <button class="btn" style="background-color: blue; color: white;" onclick="changeColor('blue')" title="Blue(Cntrl + Shift + B)">B</button>
-        <button class="btn" style="background-color: red; color: white;" onclick="changeColor('red')" title="Red(Cntrl + Shift + R)">R</button>
-        <button class="btn" style="background-color: black; color: white;" onclick="changeColor('black')" title="Black(Cntrl + Shift + K)">BL</button>
-        <button class="btn" style="background-color: green; color: white;" onclick="changeColor('green')" title="Green(Cntrl + Shift + G)">G</button> -->
-        <!-- <button class="btn" onclick="formatText('justifyLeft')" title="Align Left"><i class="fas fa-align-left"></i></button>
-        <button class="btn" onclick="formatText('justifyCenter')" title="Align Center"><i class="fas fa-align-center"></i></button>
-        <button class="btn" onclick="formatText('justifyRight')" title="Align Right"><i class="fas fa-align-right"></i></button>
-        <button class="btn" onclick="formatText('justifyRight')" title="Align Right"><i class="fas fa-align-right"></i></button> -->
-        <button class="btn"  title="Download TXT" id="download-btn"><i class="fas fa-download"></i></button>
-
+        <button class="btn" id="download-btn" title="Download TXT"><i class="fas fa-download"></i></button>
         <button class="btn" onclick="copyText()" title="Copy Text (Ctrl + C)"><i class="fas fa-copy"></i> Copy Text</button>
         <button class="btn" id="copy-url">Copy URL</button>
-      
-     
-       
+      </div>
 
-        <!-- <button class="btn" onclick="copyHTML()" title="Copy HTML (Ctrl + Shift + C)"><i class="fas fa-code"></i> Copy HTML</button> -->
-    </div>
-    <div class="input-container">
+      <!-- Input Container -->
+      <div class="input-container">
         <b>Text Editor</b>
         <div contenteditable="true" class="input-field"></div>
+      </div>
     </div>
-    
-</div>
-<div id="share-modal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn" id="close-modal">&times;</span>
-    <p>URL copied Share it via</p>
-    <button id="share-email" class="share-button" disabled>
-      <i class="fas fa-envelope"></i> Share via Email
-    </button>
-    <button id="share-whatsapp" class="share-button" style="background-color: #25D366; color: white;" disabled>
-      <i class="fab fa-whatsapp"></i> Share via WhatsApp
-    </button>
   </div>
-</div>
 
+  <!-- Share Modal -->
+  <div id="share-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="close-modal">&times;</span>
+      <p>URL copied Share it via</p>
+      <button id="share-email" class="share-button" disabled>
+        <i class="fas fa-envelope"></i> Share via Email
+      </button>
+      <button id="share-whatsapp" class="share-button" style="background-color: #25D366; color: white;" disabled>
+        <i class="fab fa-whatsapp"></i> Share via WhatsApp
+      </button>
+    </div>
+  </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="/script.js"></script>
-<!-- <script src="/firebaseconnection.js"></script> -->
-<script src="/MyEditor.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth-compat.js"></script>
-
+  <!-- Scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="/script.js"></script>
+  <script src="/MyEditor.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth-compat.js"></script>
 
 </body>
 </html>
