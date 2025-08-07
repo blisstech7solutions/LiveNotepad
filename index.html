@@ -2,43 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/collab connect.png">
-  <title>Text|Edit|Sync</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="icon" type="image/png" href="/collab connect.png">
+  <title>Text | Edit | Sync</title>
 
   <!-- Bootstrap & Icons -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
   <style>
-html, body {
-  height: 100%;
-  margin: 0;
-  overflow: hidden;  /* Prevent all scrolling */
-  font-family: 'Segoe UI', sans-serif;
-  display: flex;
-  flex-direction: column;
-}
+    html, body {
+      height: 100%;
+      margin: 0;
+      overflow-x: hidden; /* allow vertical scroll */
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
 
-main {
-  flex: 1;
-  overflow: hidden;
-}
-.features {
-  padding: 40px 0; /* reduced from 60px */
-}
+    main {
+      flex: 1;
+    }
 
     /* Navbar */
     .navbar {
       background: linear-gradient(to right, #4facfe, #00f2fe);
       padding: 0.8rem 1rem;
     }
+
     .navbar-brand {
       font-weight: bold;
       color: white !important;
       display: flex;
       align-items: center;
     }
+
     .navbar-brand img {
       height: 45px;
       margin-right: 8px;
@@ -51,14 +49,19 @@ main {
       padding: 28px 0;
       text-align: center;
     }
+
     .logo-container img {
-      width: 90px;
-      margin: 10px;
+      max-width: 150px;
+      width: 100%;
+      height: auto;
+      margin: 10px auto;
       transition: transform 0.3s ease;
     }
+
     .logo-container img:hover {
-      transform: scale(1.2);
+      transform: scale(1.1);
     }
+
     .btn-main {
       background: linear-gradient(90deg, #4CAF50, #45a049);
       border: none;
@@ -68,6 +71,7 @@ main {
       color: white;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
+
     .btn-main:hover {
       transform: translateY(-2px);
       box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
@@ -78,16 +82,20 @@ main {
       padding: 60px 0;
       background: #f8f9fa;
     }
+
     .feature-box {
       padding: 25px;
       border-radius: 10px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       background: white;
+      height: 100%;
     }
+
     .feature-box:hover {
       transform: translateY(-5px);
       box-shadow: 0px 8px 20px rgba(0,0,0,0.1);
     }
+
     .feature-icon {
       font-size: 45px;
       color: #4facfe;
@@ -100,7 +108,6 @@ main {
       color: white;
       padding: 15px 0;
       text-align: center;
-      margin-top: auto;
       font-size: 14px;
     }
   </style>
@@ -109,20 +116,20 @@ main {
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark">
-  <!-- <div class="container">
+  <div class="container">
     <a class="navbar-brand" href="#">
       <img src="/collab connect.png" alt="Logo">
       Collab Connect
     </a>
-  </div> -->
+  </div>
 </nav>
 
 <main>
   <!-- Hero Section -->
   <section class="hero">
     <div class="container">
-      <div class="logo-container">
-        <img src="/collab connect.png" alt="Collab Connect Logo" style="width: 20%;height: 20%;">
+      <div class="logo-container text-center">
+        <img src="/collab connect.png" alt="Collab Connect Logo" class="img-fluid">
       </div>
       <h1 class="mt-4">Real-Time Text Collaboration</h1>
       <p class="lead mb-4">Share, edit, and sync your text seamlessly with anyone, anywhere.</p>
