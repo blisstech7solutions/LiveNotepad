@@ -68,7 +68,7 @@
       position: sticky;
       top: 0;
       background: white;
-      padding: 8px 629px;
+      padding: 8px 12px;
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
@@ -228,11 +228,6 @@
     .share-button i {
       font-size: 1.3rem;
     }
-    .input-field:empty::before {
-      content: attr(data-placeholder);
-      color: #aaa;
-      pointer-events: none;
-    text-align: center;}
 
     @media (max-width: 768px) {
       .toolbar {
@@ -242,6 +237,10 @@
         flex: 1 1 40px;
         padding: 8px;
       }
+      .input-field:empty::before {
+      content: attr(data-placeholder);
+      color: #aaa;
+      pointer-events: none;}
       header .header-icons {
         gap: 12px;
       }
@@ -264,7 +263,7 @@
   <div class="Editor-container">
     <div class="editor-scroll">
       <!-- Sticky Toolbar inside scroll -->
-      <div class="toolbar center-wrapper">
+      <div class="toolbar">
         <button onclick="saveContentToFirestore()">Save Content</button>
         <button class="btn" onclick="formatText('bold')" title="Bold(Cntrl + B)"><i class="fas fa-bold"></i></button>
         <button class="btn" onclick="formatText('italic')" title="Italic(Cntrl + I)"><i class="fas fa-italic"></i></button>
@@ -279,7 +278,7 @@
       <!-- Input Container -->
       <div class="input-container">
         <!-- <b>Text Editor</b> -->
-        <div contenteditable="true" class="input-field" data-placeholder="Type / paste your text here..."></div>
+        <div contenteditable="true" class="input-field" data-placeholder="Type /paste your text here..."></div>
       </div>
     </div>
   </div>
