@@ -14,7 +14,7 @@
     html, body {
       height: 100%;
       margin: 0;
-      overflow-x: hidden; /* allow vertical scroll */
+      overflow-x: hidden;
       font-family: 'Segoe UI', sans-serif;
       display: flex;
       flex-direction: column;
@@ -24,33 +24,49 @@
       flex: 1;
     }
 
-  
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      padding: 0.8rem 1rem;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      color: white !important;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-brand img {
+      height: 45px;
+      margin-right: 8px;
+    }
 
     /* Hero */
     .hero {
       background: linear-gradient(to right, #4facfe, #00f2fe);
       color: white;
-      padding: 28px 0;
+      padding: 16px 0; /* Reduced height */
       text-align: center;
     }
 
     .logo-container img {
-      max-width: 150px;
-      width: 100%;
+      max-height: 80px;
+      width: auto;
       height: auto;
-      margin: 10px auto;
+      margin: 8px auto;
       transition: transform 0.3s ease;
     }
 
     .logo-container img:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
 
     .btn-main {
       background: linear-gradient(90deg, #4CAF50, #45a049);
       border: none;
-      padding: 14px 28px;
-      font-size: 18px;
+      padding: 12px 24px;
+      font-size: 16px;
       border-radius: 8px;
       color: white;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -98,17 +114,15 @@
 </head>
 <body>
 
-
-
 <main>
   <!-- Hero Section -->
   <section class="hero">
-    <div class="container">
-      <div class="logo-container text-center">
+    <div class="container py-2">
+      <div class="logo-container text-center mb-2">
         <img src="/collab connect.png" alt="Collab Connect Logo" class="img-fluid">
       </div>
-      <h1 class="mt-4">Real-Time Text Collaboration</h1>
-      <p class="lead mb-4">Share, edit, and sync your text seamlessly with anyone, anywhere.</p>
+      <h1 class="h4 mb-2">Real-Time Text Collaboration</h1>
+      <p class="lead mb-3" style="font-size: 1rem;">Share, edit, and sync your text seamlessly with anyone, anywhere.</p>
       <button id="Share-Code" class="btn-main">
         <i class="fa fa-hand-pointer"></i> Share Text in Sync
       </button>
@@ -161,4 +175,3 @@
 
 </body>
 </html>
-
