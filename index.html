@@ -3,24 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Collab Connect | Real-Time Text Collaboration</title>
+    <link rel="icon" type="image/png" href="/collab connect.png">
+  <title>Text|Edit|Sync</title>
 
   <!-- Bootstrap & Icons -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
   <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      font-family: 'Segoe UI', sans-serif;
-    }
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;  /* Prevent all scrolling */
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+}
 
-    main {
-      flex: 1;
-    }
+main {
+  flex: 1;
+  overflow: hidden;
+}
+.features {
+  padding: 40px 0; /* reduced from 60px */
+}
 
     /* Navbar */
     .navbar {

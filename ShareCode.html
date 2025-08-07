@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="/collab connect.png" />
   <title>Text|Edit|Sync</title>
 
   <!-- Bootstrap & FontAwesome -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
   <!-- SweetAlert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -27,40 +28,33 @@
     header {
       position: sticky;
       top: 0;
-      background:white;
-      color: white;
+      background: linear-gradient(to right, #a5e1fa, #8e2de2);
+      color: black;
       height: 70px;
       display: flex;
       align-items: center;
-      justify-content: center; /* center logo */
-      padding: 0 20px;
+      justify-content: space-between;
+      padding: 0 24px;
       z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    header .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     header img.logo {
-      height: 50px; /* bigger size */
+      height: 40px;
       user-select: none;
     }
 
-    header .header-icons {
-      position: absolute;
-      right: 20px;
-      display: flex;
-      gap: 20px;
-    }
-
-    header .header-icons button {
-      background: transparent;
-      border: none;
-      color: white;
-      font-size: 1.3rem;
-      cursor: pointer;
-      transition: color 0.25s ease;
-    }
-
-    header .header-icons button:hover {
-      color: #38bdf8;
+    header .logo-text {
+      font-size: 20px;
+      font-weight: bold;
+      white-space: nowrap;
     }
 
     /* Toolbar fixed inside container */
@@ -75,6 +69,7 @@
       align-items: center;
       box-shadow: 0 1px 5px rgba(0,0,0,0.1);
       z-index: 10;
+      justify-content: flex-start;
     }
 
     /* Toolbar buttons */
@@ -91,6 +86,12 @@
       gap: 6px;
       transition: background-color 0.3s ease, box-shadow 0.3s ease;
       user-select: none;
+
+      /* Flexible sizing */
+      flex: 1 1 auto;
+      min-width: 50px;
+      max-width: 180px;
+      justify-content: center;
     }
 
     .toolbar .btn:hover, .toolbar button:hover {
@@ -99,15 +100,18 @@
     }
 
     /* Save Content button special style */
-    .toolbar button:first-child {
+    .toolbar button:last-child {
       background: linear-gradient(90deg, #f97316, #facc15);
       color: #1a1a1a;
       font-weight: 700;
       box-shadow: 0 0 8px #f97316;
       transition: background 0.4s ease, box-shadow 0.4s ease;
+      max-width: 220px;
+      min-width: 120px;
+      flex: 2 1 150px;
     }
 
-    .toolbar button:first-child:hover {
+    .toolbar button:last-child:hover {
       background: linear-gradient(90deg, #ea580c, #eab308);
       box-shadow: 0 0 15px #ea580c;
       animation: pulse 1.5s infinite;
@@ -143,6 +147,7 @@
       display: flex;
       flex-direction: column;
       padding: 20px;
+      min-height: 0;
     }
 
     .input-container > b {
@@ -165,11 +170,22 @@
       box-shadow: inset 0 0 8px #cbd5e1;
       transition: border-color 0.3s ease;
       min-height: 0;
+      min-width: 0;
+      word-break: break-word;
     }
 
     .input-field:focus {
       border-color: #0ea5e9;
       box-shadow: 0 0 10px #0ea5e9;
+    }
+
+    /* Placeholder for contenteditable */
+    .input-field:empty::before {
+      content: attr(data-placeholder);
+      color: #aaa;
+      pointer-events: none;
+      user-select: none;
+      display: block;
     }
 
     /* Modal */
@@ -229,65 +245,102 @@
       font-size: 1.3rem;
     }
 
+    /* Responsive */
     @media (max-width: 768px) {
+      header {
+        padding: 0 12px;
+      }
+
+      header .logo-container {
+        gap: 6px;
+      }
+
+      header img.logo {
+        height: 30px;
+      }
+
+      header .logo-text {
+        font-size: 16px;
+      }
+
       .toolbar {
         justify-content: center;
       }
-      .toolbar button, .toolbar .btn {
-        flex: 1 1 40px;
-        padding: 8px;
+
+      .toolbar .btn, .toolbar button {
+        flex: 1 1 40px !important;
+        max-width: 100px !important;
+        min-width: 40px !important;
+        padding: 8px 6px;
+        font-size: 0.9rem;
+        justify-content: center;
       }
-      .input-field:empty::before {
-      content: attr(data-placeholder);
-      color: #aaa;
-      pointer-events: none;}
-      header .header-icons {
-        gap: 12px;
+
+      .toolbar button:first-child {
+        flex: 1 1 120px !important;
+        max-width: 150px !important;
+        min-width: 100px !important;
       }
     }
   </style>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
 
   <!-- Sticky Header -->
   <header>
-    <img src="collab connect.png" alt="Logo" class="logo" />
-    <div class="header-icons">
-      <button title="Settings"><i class="fas fa-cog"></i></button>
-      <button title="Help"><i class="fas fa-question-circle"></i></button>
-      <button title="User Account"><i class="fas fa-user-circle"></i></button>
+    <div class="logo-container">
+      <img src="collab connect.png" alt="Logo" class="logo" />
+      <span class="logo-text">Collab Connect</span>
     </div>
   </header>
 
   <!-- Editor Container -->
-  <div class="Editor-container">
+  <div class="Editor-container" role="main" aria-label="Text editor container">
     <div class="editor-scroll">
       <!-- Sticky Toolbar inside scroll -->
-      <div class="toolbar">
-        <button onclick="saveContentToFirestore()">Save Content</button>
-        <button class="btn" onclick="formatText('bold')" title="Bold(Cntrl + B)"><i class="fas fa-bold"></i></button>
-        <button class="btn" onclick="formatText('italic')" title="Italic(Cntrl + I)"><i class="fas fa-italic"></i></button>
-        <button class="btn" onclick="formatText('underline')" title="Underline(Cntrl + U)"><i class="fas fa-underline"></i></button>
-        <button class="btn" onclick="addBullet()" title="Unordered List(Cntrl + Shift + U)"><i class="fas fa-list-ul"></i></button>
-        <button class="btn" onclick="addNumberedList()" title="Ordered List(Cntrl + Shift + O)"><i class="fas fa-list-ol"></i></button>
-        <button class="btn" id="download-btn" title="Download TXT"><i class="fas fa-download"></i></button>
-        <button class="btn" onclick="copyText()" title="Copy Text (Ctrl + C)"><i class="fas fa-copy"></i> Copy Text</button>
-        <button class="btn" id="copy-url">Copy URL</button>
+      <div class="toolbar" role="toolbar" aria-label="Editor toolbar">
+      
+        <button class="btn" onclick="formatText('bold')" title="Bold (Ctrl + B)" aria-label="Bold"><i class="fas fa-bold"
+            aria-hidden="true"></i></button>
+        <button class="btn" onclick="formatText('italic')" title="Italic (Ctrl + I)" aria-label="Italic"><i
+            class="fas fa-italic" aria-hidden="true"></i></button>
+        <button class="btn" onclick="formatText('underline')" title="Underline (Ctrl + U)" aria-label="Underline"><i
+            class="fas fa-underline" aria-hidden="true"></i></button>
+        <button class="btn" onclick="addBullet()" title="Unordered List (Ctrl + Shift + U)" aria-label="Unordered List"><i
+            class="fas fa-list-ul" aria-hidden="true"></i></button>
+        <button class="btn" onclick="addNumberedList()" title="Ordered List (Ctrl + Shift + O)" aria-label="Ordered List"><i
+            class="fas fa-list-ol" aria-hidden="true"></i></button>
+        <button class="btn" id="download-btn" title="Download TXT" aria-label="Download Text"><i class="fas fa-download"
+            aria-hidden="true"></i></button>
+        <button class="btn" onclick="copyText()" title="Copy Text (Ctrl + C)" aria-label="Copy Text"><i class="fas fa-copy"
+            aria-hidden="true"></i></button>
+        <button class="btn" id="copy-url" aria-label="Copy URL" title="Copy URL">
+          <i class="fas fa-link" aria-hidden="true"></i>
+        </button>
+        <button onclick="saveContentToFirestore()" aria-label="Save Content">Save It</button>
       </div>
 
       <!-- Input Container -->
       <div class="input-container">
-        <!-- <b>Text Editor</b> -->
-        <div contenteditable="true" class="input-field" data-placeholder="Type /paste your text here..."></div>
+        <div
+          contenteditable="true"
+          class="input-field"
+          data-placeholder="Type / paste your text here..."
+          aria-label="Text editor"
+          role="textbox"
+          spellcheck="true"
+        ></div>
       </div>
     </div>
   </div>
 
   <!-- Share Modal -->
-  <div id="share-modal" class="modal">
+  <div id="share-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="share-modal-title" aria-describedby="share-modal-desc">
     <div class="modal-content">
-      <span class="close-btn" id="close-modal">&times;</span>
-      <p>URL copied Share it via</p>
+      <span class="close-btn" id="close-modal" role="button" aria-label="Close modal" tabindex="0">&times;</span>
+      <p id="share-modal-desc">URL copied Share it via</p>
       <button id="share-email" class="share-button" disabled>
         <i class="fas fa-envelope"></i> Share via Email
       </button>
